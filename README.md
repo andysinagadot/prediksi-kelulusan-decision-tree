@@ -1,17 +1,31 @@
-# Sistem Prediksi Kelulusan Mahasiswa (Semester 1–8)
+# Sistem Prediksi Kelulusan Mahasiswa (Semester 1–8) Menggunakan Algoritma Decision Tree
 
-Proyek machine learning berbasis algoritma **Decision Tree** untuk memprediksi status kelulusan mahasiswa (`Lulus Tepat Waktu` vs `Berisiko Terlambat`) berdasarkan data akademik hingga semester 8.
+Aplikasi prediksi kelulusan mahasiswa berbasis **Machine Learning** menggunakan algoritma **Decision Tree** (`DecisionTreeClassifier` dengan `class_weight="balanced"`) untuk data akademik Semester 1–8, dilengkapi antarmuka web interaktif berbasis **Streamlit**.
 
-## Fitur Akademik (`X`)
-- `ipk_sem1_8`: IPK mahasiswa semester 1–8
-- `sks_lulus`: Total SKS yang telah lulus
-- `kehadiran_persen`: Persentase kehadiran perkuliahan
-- `jumlah_mengulang`: Jumlah mata kuliah yang diulang
+## Fitur Utama
+- **Prediksi Satuan (Single Prediction):** Memprediksi status kelulusan satu mahasiswa berdasarkan input data akademik Semester 1–8.
+- **Prediksi Massal / Batch CSV:** Mengunggah file CSV (seperti data kohort mahasiswa lengkap dengan `nim`) untuk memprediksi banyak mahasiswa sekaligus, menampilkan persentase kelulusan, dan mengunduh/menampilkan hasilnya.
+- **Interpretasi Model & Aturan IF-THEN:** Menampilkan struktur pohon keputusan (`pohon_keputusan_kelulusan.png`) serta ekstraksi aturan *IF-THEN* agar alur keputusan model mudah dipahami secara akademis.
+- **Evaluasi Model:** Menyajikan metrik evaluasi beserta visualisasi **Confusion Matrix** (`confusion_matrix.png`) dan **Feature Importance** (`feature_importance.png`).
+- **Validasi Input & Penanganan Ketidakseimbangan Kelas:** Menggunakan `class_weight="balanced"` saat pelatihan dan validasi kolom/data saat unggah file CSV.
 
-## Target (`y`)
-- `status_lulus`: `1` = Lulus Tepat Waktu, `0` = Berisiko Terlambat
+## Teknologi yang Digunakan
+- **Bahasa Pemrograman:** Python
+- **Pengolahan Data & Komputasi:** Pandas, NumPy
+- **Machine Learning:** Scikit-Learn (`DecisionTreeClassifier`)
+- **Penyimpanan Model:** Joblib
+- **Visualisasi:** Matplotlib
+- **Antarmuka Web:** Streamlit
 
-## Cara Menjalankan
-1. Instal dependensi:
-   ```bash
-   py -m pip install -r requirements.txts
+## Struktur Folder Proyek
+```text
+proyek_kelulusan_ai/
+├── app_kelulusan.py                      # Aplikasi web interaktif Streamlit
+├── train_model.py                        # Skrip pelatihan model Decision Tree & pembuatan grafik evaluasi
+├── dataset_kelulusan_mahasiswa_sem1_8.csv# Dataset utama pelatihan model (Semester 1–8)
+├── model_decision_tree_kelulusan.joblib  # Model Decision Tree terlatih
+├── confusion_matrix.png                  # Visualisasi Confusion Matrix
+├── feature_importance.png                # Visualisasi tingkat kepentingan fitur
+├── pohon_keputusan_kelulusan.png         # Visualisasi struktur pohon keputusan
+├── requirements.txt                      # Daftar dependensi library Python
+└── README.md                             # Dokumentasi proyek
